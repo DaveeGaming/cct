@@ -22,9 +22,12 @@ local bullet = {
 
 
 function Draw()
+    term.setBackgroundColor(colors.black)
     term.clear()
-    paintutils.drawFilledBox(paddle1.x,paddle1.y,paddle1.x, paddleheight, colors.white)
-    paintutils.drawFilledBox(paddle2.x,paddle2.y,paddle2.x, paddleheight, colors.white)
+    term.setBackgroundColor(colors.white)
+    paintutils.drawFilledBox(paddle1.x,paddle1.y,paddle1.x, paddleheight)
+    paintutils.drawFilledBox(paddle2.x,paddle2.y,paddle2.x, paddleheight)
+    paintutils.drawFilledBox(bullet.x, bullet.y, bullet.x, bullet.y)
 end
 
 function Update()
