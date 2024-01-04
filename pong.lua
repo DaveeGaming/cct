@@ -37,11 +37,14 @@ function Draw()
 end
 
 function Input()
-    local event, key, is_held = os.pullEventRaw("key")
+    os.startTimer(0.2)
+    local event, key, is_held = os.pullEvent("key")
     if key == keys.w then
         paddle1.y = paddle1.y - 1
     elseif key == keys.s then
         paddle1.y = paddle1.y + 1
+    elseif event = "timer" then
+        break
     end
 
 
@@ -74,7 +77,8 @@ end
 
 while true do
     Draw()
-    parallel.waitForAny(Update,Input)
+    Input()
+    Update()
 end
 
 
