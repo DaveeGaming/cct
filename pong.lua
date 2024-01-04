@@ -31,13 +31,13 @@ function Draw()
     paintutils.drawFilledBox(paddle2.x,paddle2.y,paddle2.x, paddle2.y + paddleheight)
     paintutils.drawFilledBox(bullet.x, bullet.y, bullet.x, bullet.y)
 
-    term.setCursorPos(1,height/2-2)
+    term.setCursorPos(width/2-5,2)
     term.write(paddle1.points + "  " + paddle2.points)
 
 end
 
-function Update()
-    local event, key, is_held = os.pullEvent("key")
+function Input()
+    local event, key, is_held = os.pullEventRaw("key")
     if key == keys.w then
         paddle1.y = paddle1.y - 1
     elseif key == keys.s then
@@ -50,12 +50,15 @@ function Update()
     elseif key == keys.down then
         paddle2.y = paddle2.y + 1
     end
+end
+
+function Update()
 
     if bullet.y <= 1 or bullet.y >= height - 1 then bullet.velocy = bullet.velocy * -1 end
 
-    if bullet.x == paddle1.x and bullet.y > paddle1.y and bullet.y < paddle1.y + paddleheight then
+    if bullet.x == paddle1.x then 
        bullet.velocx = bullet.velocx * -1 
-    elseif bullet.x == paddle2.x and bullet.y > paddle2.y and bullet.y < paddle2.y + paddleheight then
+    elseif bullet.x == paddle2.x then 
        bullet.velocx = bullet.velocx * -1 
     elseif bullet.x < 0 then
         paddle2.points = paddle2.points + 1
@@ -71,7 +74,7 @@ end
 
 while true do
     Draw()
-    Update()
+    parallel.waitForAny(Update,Input)
 end
 
 
