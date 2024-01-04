@@ -24,13 +24,12 @@ local bullet = {
 
 
 function Draw()
-    term.setBackgroundColor(colors.black)
     term.clear()
     term.setBackgroundColor(colors.white)
     paintutils.drawFilledBox(paddle1.x,paddle1.y,paddle1.x, paddle1.y + paddleheight)
     paintutils.drawFilledBox(paddle2.x,paddle2.y,paddle2.x, paddle2.y + paddleheight)
     paintutils.drawFilledBox(bullet.x, bullet.y, bullet.x, bullet.y)
-
+    term.setBackgroundColor(colors.black)
     term.setCursorPos(width/2-5,2)
     term.write(paddle1.points .. "  " .. paddle2.points)
 
@@ -39,19 +38,20 @@ end
 function Input()
     os.startTimer(0.2)
     local event, key, is_held = os.pullEvent("key")
-    if key == keys.w then
-        paddle1.y = paddle1.y - 1
-    elseif key == keys.s then
-        paddle1.y = paddle1.y + 1
-    elseif event = "timer" then
-        break
-    end
-
-
-    if key == keys.up then
-        paddle2.y = paddle2.y - 1
-    elseif key == keys.down then
-        paddle2.y = paddle2.y + 1
+    if event == "timer" then
+           -- nothin
+    elseif event == "key" then
+         if key == keys.w then
+            paddle1.y = paddle1.y - 1
+        elseif key == keys.s then
+            paddle1.y = paddle1.y + 1
+        end
+    
+        if key == keys.up then
+            paddle2.y = paddle2.y - 1
+        elseif key == keys.down then
+            paddle2.y = paddle2.y + 1
+        end
     end
 end
 
