@@ -32,7 +32,7 @@ function Draw()
     paintutils.drawFilledBox(bullet.x, bullet.y, bullet.x, bullet.y)
 
     term.setCursorPos(width/2-5,2)
-    term.write(paddle1.points + "  " + paddle2.points)
+    term.write(paddle1.points .. "  " .. paddle2.points)
 
 end
 
