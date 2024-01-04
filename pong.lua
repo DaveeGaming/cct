@@ -9,7 +9,7 @@ local paddle1 = {
 }
 
 local paddle2 = {
-    x = width - 1,
+    x = width - 2,
     y = height / 2 - paddleheight / 2,
 }
 
@@ -22,6 +22,7 @@ local bullet = {
 
 
 function Draw()
+    term.clear()
     paintutils.drawFilledBox(paddle1.x,paddle1.y,paddle1.x, paddleheight, colors.white)
     paintutils.drawFilledBox(paddle2.x,paddle2.y,paddle2.x, paddleheight, colors.white)
 end
@@ -29,16 +30,16 @@ end
 function Update()
     local event, key, is_held = os.pullEvent("key")
     if key == keys.w then
-        paddle1.x = paddle1.x + 1
+        paddle1.y = paddle1.y + 1
     elseif key == keys.s then
-        paddle1.x = paddle1.x - 1
+        paddle1.y = paddle1.y - 1
     end
 
 
     if key == keys.up then
-        paddle1.x = paddle1.x + 1
+        paddle2.y = paddle2.y + 1
     elseif key == keys.down then
-        paddle1.x = paddle1.x - 1
+        paddle2.y = paddle2.y - 1
     end
 
 end
